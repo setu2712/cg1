@@ -1,0 +1,46 @@
+#include<windows.h> 
+#include<GL/glut.h> 
+Float trianglePosX=-0.5;    //Initial position of triangle 
+Float triangleSpeed=0.005;  //speed of the triangle 
+void display() 
+{ 
+ glClear(GL_COLOR_BUFFER_BIT); 
+ glLoadIdentity(); 
+ glBegin(GL_TRIANGLES); 
+ glColor3f(1.0,0.0,0.0); //Red color 
+          glVertex2f(trianglePosX,0.0); 
+           glVertex2f(trianglePosX+0.1,0.2); 
+ glVertex2f(trianglePosX+0.2,0.0); 
+ glEnd(); 
+ glutSwapBuffers(); 
+} 
+void update(int value) 
+{  
+ trianglePosX+=triangleSpeed; 
+  
+ if(trianglePosX>1.1) 
+     trianglePosX=-0.05; 
+ 
+
+ glutPostRedisplay(); 
+  
+ glutTimerFunc(16,update,0); 
+} 
+ 
+void init() 
+{ 
+ glClearColor(1.0,1.0,1.0,1.0); //white background color 
+} 
+int main (int argc,char** argv) 
+{ 
+ glutInit(&argc,argv) 
+glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGB); 
+glutInitWindowSize(800,600); 
+glutCreateWindow(“opengl Animation); 
+init(); 
+glutDisplayFunc(display); 
+glutTimerFunc(display); 
+glutTimerFunc(16,update,0); //call update() after 16 milliseconds 
+glutMainLoop(); 
+return 0; 
+}
